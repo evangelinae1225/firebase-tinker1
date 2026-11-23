@@ -2,7 +2,7 @@
 import { initializeApp } from 'firebase/app'
 import {
   getFirestore, collection, getDocs
-} from `firebase/firestore`
+} from 'firebase/firestore'
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -30,7 +30,12 @@ const colRef = collection(db, 'books')
 // get collection data
 getDocs(colRef)
   .then((snapshot) => {
-    console.log(snapshot.docs)
+    let books = [] // adds new object to the books array
+    snapshot.docs.forEach((doc) => {
+      books.push({...doc.data(), id: doc.id}) // get data and id
+
+    })
+    console.log(books)
   } )
  
  
